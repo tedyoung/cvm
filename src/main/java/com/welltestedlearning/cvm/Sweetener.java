@@ -1,21 +1,19 @@
 package com.welltestedlearning.cvm;
 
-public class Sweetener implements CoffeeItem {
+public class Sweetener extends QuantityItem implements CoffeeItem {
   private final String type;
-  private final int quantity;
 
   public Sweetener(String theType) {
     type = theType;
-    quantity = 1;
   }
 
   public Sweetener(String option, int theQuantity) {
+    super(theQuantity);
     type = option;
-    quantity = theQuantity;
   }
 
   @Override
-  public int price() {
+  public int basePrice() {
     final int price;
     switch (type) {
       case "sugar":
@@ -28,7 +26,7 @@ public class Sweetener implements CoffeeItem {
         price = 0;
         break;
     }
-    return price * quantity;
+    return price;
   }
 
   @Override

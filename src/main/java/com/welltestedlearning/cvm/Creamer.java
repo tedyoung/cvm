@@ -1,27 +1,23 @@
 package com.welltestedlearning.cvm;
 
-public class Creamer implements CoffeeItem {
+public class Creamer extends QuantityItem implements CoffeeItem {
 
-  private static final int DEFAULT_QUANTITY = 1;
-
-  private final int quantity;
   private String creamer = "";
 
   public Creamer(String type) {
     creamer = type;
-    quantity = DEFAULT_QUANTITY;
   }
 
   public Creamer() {
-    quantity = DEFAULT_QUANTITY;
   }
 
   public Creamer(String type, int theQuantity) {
+    super(theQuantity);
     creamer = type;
-    quantity = theQuantity;
   }
 
-  public int price() {
+  @Override
+  public int basePrice() {
     int price = 0;
     switch (creamer) {
       case "milk":
@@ -31,7 +27,7 @@ public class Creamer implements CoffeeItem {
         price += 35;
         break;
     }
-    return price * quantity;
+    return price;
   }
 
   public String display() {
