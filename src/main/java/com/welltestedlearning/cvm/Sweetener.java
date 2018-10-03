@@ -1,24 +1,34 @@
 package com.welltestedlearning.cvm;
 
-public class Sweetener extends CoffeeItem {
+public class Sweetener implements CoffeeItem {
   private final String type;
-
-  public Sweetener() {
-    type = "";
-  }
+  private final int quantity;
 
   public Sweetener(String theType) {
     type = theType;
+    quantity = 1;
+  }
+
+  public Sweetener(String option, int theQuantity) {
+    type = option;
+    quantity = theQuantity;
   }
 
   @Override
   public int price() {
-    if (type.equals("sugar")) {
-      return 10;
-    } else if (type.equals("splenda")) {
-      return 15;
+    final int price;
+    switch (type) {
+      case "sugar":
+        price = 10;
+        break;
+      case "splenda":
+        price = 15;
+        break;
+      default:
+        price = 0;
+        break;
     }
-    return 0;
+    return price * quantity;
   }
 
   @Override

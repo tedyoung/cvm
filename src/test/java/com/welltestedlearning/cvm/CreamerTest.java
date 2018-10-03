@@ -22,4 +22,12 @@ public class CreamerTest {
         .isEqualTo(35);
   }
 
+  @Test
+  public void twoMilksCost50() throws Exception {
+    Creamer milks = new Creamer("milk", 2);
+
+    assertThat(milks.price())
+        .isEqualTo(50);
+  }
+
 }

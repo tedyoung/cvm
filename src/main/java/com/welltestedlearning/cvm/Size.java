@@ -1,6 +1,6 @@
 package com.welltestedlearning.cvm;
 
-public class Size extends CoffeeItem {
+public class Size implements CoffeeItem {
   private final String size;
 
   public Size() {

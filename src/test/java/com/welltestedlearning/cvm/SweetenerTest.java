@@ -22,4 +22,11 @@ public class SweetenerTest {
         .isEqualTo(15);
   }
 
+  @Test
+  public void threeSplendaIs45() throws Exception {
+    Sweetener splendas = new Sweetener("splenda", 3);
+
+    assertThat(splendas.price())
+        .isEqualTo(45);
+  }
 }
