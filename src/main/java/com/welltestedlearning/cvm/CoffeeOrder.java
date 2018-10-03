@@ -1,47 +1,35 @@
 package com.welltestedlearning.cvm;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CoffeeOrder {
-  private String size = "";
-  private String creamer = "";
+  private List<CoffeeItem> coffeeItems = new ArrayList<>();
 
   public int price() {
-    return sizePrice() + creamerPrice();
-  }
-
-  private int creamerPrice() {
     int price = 0;
-    switch (creamer) {
-      case "milk":
-        price += 25;
-        break;
-      case "half-n-half":
-        price += 35;
-        break;
+    for (CoffeeItem item : coffeeItems) {
+      price += item.price();
     }
     return price;
   }
 
-  private int sizePrice() {
-    int price = 0;
-    switch (size) {
-      case "small":
-        price += 100;
-        break;
-      case "medium":
-        price += 150;
-        break;
-      case "large":
-        price += 200;
-        break;
+  public void display() {
+    for (CoffeeItem item : coffeeItems) {
+      System.out.println(item.display());
     }
-    return price;
+    System.out.println("Price: " + price());
   }
 
   public void size(String size) {
-    this.size = size;
+    coffeeItems.add(new Size(size));
   }
 
   public void creamer(String creamer) {
-    this.creamer = creamer;
+    coffeeItems.add(new Creamer(creamer));
+  }
+
+  public void sweetener(String sweetener) {
+    coffeeItems.add(new Sweetener(sweetener));
   }
 }
