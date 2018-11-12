@@ -7,20 +7,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class CoffeeOrderApiController {
 
   private CoffeeOrderRepository coffeeOrderRepository;
+  private CurrencyConversionService currencyConversionService;
 
   @Autowired
-  public CoffeeOrderApiController(CoffeeOrderRepository coffeeOrderRepository) {
+  public CoffeeOrderApiController(CoffeeOrderRepository coffeeOrderRepository, CurrencyConversionService currencyConversionService) {
     this.coffeeOrderRepository = coffeeOrderRepository;
+    this.currencyConversionService = currencyConversionService;
   }
 
   @GetMapping("/api/coffeeorders/{id}")
-  public ResponseEntity<CoffeeOrderResponse> coffeeOrderInfo(@PathVariable("id") String coffeeOrderId) {
+  public ResponseEntity<CoffeeOrderResponse> coffeeOrderInfo(@PathVariable("id") String coffeeOrderId,
+      @RequestParam(value = "currency", defaultValue = "usd") String currency) {
     Long id = Long.valueOf(coffeeOrderId);
     CoffeeOrder coffeeOrder = coffeeOrderRepository.findOne(id);
     if (coffeeOrder == null) {
@@ -29,7 +33,12 @@ public class CoffeeOrderApiController {
 
     CoffeeOrderResponse response = new CoffeeOrderResponse();
     response.setId(String.valueOf(coffeeOrder.getId()));
+
     int price = coffeeOrder.price();
+    if (currency.equalsIgnoreCase("gbp")) {
+      price = currencyConversionService.convertToBritishPound(price);
+    }
+
     response.setPrice(String.valueOf(price));
     response.setName(coffeeOrder.name());
 
