@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class CoffeeOrderWebController {
 
   private CoffeeOrderRepository coffeeOrderRepository;
+  private CurrencyConversionService currencyConversionService;
 
   @Autowired
-  public CoffeeOrderWebController(CoffeeOrderRepository coffeeOrderRepository) {
+  public CoffeeOrderWebController(CoffeeOrderRepository coffeeOrderRepository, CurrencyConversionService currencyConversionService) {
     this.coffeeOrderRepository = coffeeOrderRepository;
+    this.currencyConversionService = currencyConversionService;
   }
 
   @GetMapping("/coffee-order/{id}")
@@ -28,7 +30,10 @@ public class CoffeeOrderWebController {
 
     CoffeeOrderResponse response = new CoffeeOrderResponse();
     response.setId(String.valueOf(coffeeOrder.getId()));
-    response.setPrice(String.valueOf(coffeeOrder.price()));
+    int price = coffeeOrder.price();
+    response.setPrice(String.valueOf(price));
+    int poundPrice = currencyConversionService.convertToBritishPound(price);
+    response.setPoundPrice(String.valueOf(poundPrice));
     response.setName(coffeeOrder.name());
 
     model.addAttribute("coffeeOrder", response);
@@ -41,7 +46,8 @@ public class CoffeeOrderWebController {
   }
 
   @PostMapping("/order-coffee")
-  public String processOrderCoffee(@ModelAttribute("name") String name, @ModelAttribute("size") String size) {
+  public String processOrderCoffee(@ModelAttribute("name") String name,
+      @ModelAttribute("size") String size) {
     CoffeeOrder coffeeOrder = new CoffeeOrder();
     coffeeOrder.changeNameTo(name);
     coffeeOrder.size(SizeOption.valueOf(size.toUpperCase()));
