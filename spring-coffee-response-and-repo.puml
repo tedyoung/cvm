@@ -1,0 +1,38 @@
+@startuml
+actor client
+activate client
+activate SpringBoot
+boundary ApiController
+database Repository as "CoffeeOrder\nRepository"
+
+client -> SpringBoot: GET /api/coffeeorders/123
+
+SpringBoot -> SpringBoot: {id} = 123
+SpringBoot -> ApiController: coffeeOrderInfo("123")
+ApiController -> Repository: findOne(123)
+activate CoffeeOrder
+CoffeeOrder --> ApiController: coffeeOrder
+create CoffeeOrderResponse
+ApiController -> CoffeeOrderResponse: transform(coffeeOrder)
+deactivate CoffeeOrder
+
+activate CoffeeOrderResponse
+CoffeeOrderResponse --> SpringBoot: response
+SpringBoot -> Jackson: mapToJson(response)
+activate Jackson
+Jackson -> Jackson: generate JSON
+activate Jackson
+Jackson -> CoffeeOrderResponse: getId()
+CoffeeOrderResponse --> Jackson: id
+Jackson -> CoffeeOrderResponse: getPrice()
+CoffeeOrderResponse --> Jackson: price
+deactivate Jackson
+destroy CoffeeOrderResponse
+Jackson --> SpringBoot: {json}
+deactivate Jackson
+
+SpringBoot --> client: {json}
+deactivate ApiController
+deactivate SpringBoot
+deactivate client
+@enduml

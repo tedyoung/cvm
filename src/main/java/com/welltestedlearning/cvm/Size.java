@@ -1,28 +1,28 @@
 package com.welltestedlearning.cvm;
 
 public class Size implements CoffeeItem {
-  private final String size;
+  private final SizeOption sizeOption;
 
   public Size() {
-    size = "";
+    sizeOption = SizeOption.SMALL;
   }
 
-  public Size(String theSize) {
-    size = theSize;
+  public Size(SizeOption theSizeOption) {
+    sizeOption = theSizeOption;
   }
 
   @Override
   public int price() {
     int price = 0;
-    switch (size) {
-      case "small":
-        price += 100;
+    switch (sizeOption) {
+      case SMALL:
+        price = 100;
         break;
-      case "medium":
-        price += 150;
+      case MEDIUM:
+        price = 150;
         break;
-      case "large":
-        price += 200;
+      case LARGE:
+        price = 200;
         break;
     }
     return price;
@@ -30,7 +30,7 @@ public class Size implements CoffeeItem {
 
   @Override
   public String display() {
-    return "Size: " + size;
+    return "Size: " + sizeOption;
   }
 
 }

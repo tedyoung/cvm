@@ -1,36 +1,37 @@
 package com.welltestedlearning.cvm;
-
 public class Creamer extends QuantityItem implements CoffeeItem {
 
-  private String creamer = "";
+  private CreamerOption creamerOption;
 
-  public Creamer(String type) {
-    creamer = type;
+  public Creamer(CreamerOption creamerOption) {
+    this.creamerOption = creamerOption;
   }
 
   public Creamer() {
   }
 
-  public Creamer(String type, int theQuantity) {
+  public Creamer(CreamerOption type, int theQuantity) {
     super(theQuantity);
-    creamer = type;
+    creamerOption = type;
   }
 
   @Override
   public int basePrice() {
     int price = 0;
-    switch (creamer) {
-      case "milk":
-        price += 25;
+    switch (creamerOption) {
+      case MILK:
+        price = 25;
         break;
-      case "half-n-half":
-        price += 35;
+      case HALF_N_HALF:
+        price = 35;
+        break;
+      case NONE:
         break;
     }
     return price;
   }
 
   public String display() {
-    return "Creamer: " + creamer;
+    return "Creamer: " + creamerOption;
   }
 }

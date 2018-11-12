@@ -8,7 +8,7 @@ public class SizeTest {
 
   @Test
   public void smallCoffeeIs100() throws Exception {
-    Size small = new Size("small");
+    Size small = new Size(SizeOption.SMALL);
 
     assertThat(small.price())
         .isEqualTo(100);
@@ -16,7 +16,7 @@ public class SizeTest {
 
   @Test
   public void mediumCoffeeIs150() throws Exception {
-    Size medium = new Size("medium");
+    Size medium = new Size(SizeOption.MEDIUM);
 
     assertThat(medium.price())
         .isEqualTo(150);
@@ -24,7 +24,7 @@ public class SizeTest {
 
   @Test
   public void largeCoffeeIs200() throws Exception {
-    Size large = new Size("large");
+    Size large = new Size(SizeOption.LARGE);
 
     assertThat(large.price())
         .isEqualTo(200);

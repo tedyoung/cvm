@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CoffeeOrder {
+  private Long id;
+
   private List<CoffeeItem> coffeeItems = new ArrayList<>();
 
   public int price() {
@@ -21,15 +23,23 @@ public class CoffeeOrder {
     System.out.println("Price: " + price());
   }
 
-  public void size(String size) {
-    coffeeItems.add(new Size(size));
+  public void size(SizeOption sizeOption) {
+    coffeeItems.add(new Size(sizeOption));
   }
 
-  public void creamer(String creamer) {
-    coffeeItems.add(new Creamer(creamer));
+  public void creamer(CreamerOption creamerOption) {
+    coffeeItems.add(new Creamer(creamerOption));
   }
 
-  public void sweetener(String sweetener) {
-    coffeeItems.add(new Sweetener(sweetener));
+  public void sweetener(SweetenerOption sweetenerOption) {
+    coffeeItems.add(new Sweetener(sweetenerOption));
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 }

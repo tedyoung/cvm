@@ -8,7 +8,7 @@ public class CreamerTest {
 
   @Test
   public void onlyMilkIs25() throws Exception {
-    Creamer milk = new Creamer("milk");
+    Creamer milk = new Creamer(CreamerOption.MILK);
 
     assertThat(milk.price())
         .isEqualTo(25);
@@ -16,7 +16,7 @@ public class CreamerTest {
 
   @Test
   public void onlyHalfnHalfIs35() throws Exception {
-    Creamer halfnhalf = new Creamer("half-n-half");
+    Creamer halfnhalf = new Creamer(CreamerOption.HALF_N_HALF);
 
     assertThat(halfnhalf.price())
         .isEqualTo(35);
@@ -24,7 +24,7 @@ public class CreamerTest {
 
   @Test
   public void twoMilksCost50() throws Exception {
-    Creamer milks = new Creamer("milk", 2);
+    Creamer milks = new Creamer(CreamerOption.MILK, 2);
 
     assertThat(milks.price())
         .isEqualTo(50);

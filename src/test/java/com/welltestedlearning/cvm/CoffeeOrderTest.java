@@ -18,8 +18,8 @@ public class CoffeeOrderTest {
   public void mediumCoffeeWithHalfNHalfIs185() throws Exception {
     CoffeeOrder coffeeOrder = new CoffeeOrder();
 
-    coffeeOrder.size("medium");
-    coffeeOrder.creamer("half-n-half");
+    coffeeOrder.size(SizeOption.MEDIUM);
+    coffeeOrder.creamer(CreamerOption.HALF_N_HALF);
 
     assertThat(coffeeOrder.price())
         .isEqualTo(185);
