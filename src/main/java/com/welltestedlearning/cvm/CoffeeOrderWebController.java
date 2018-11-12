@@ -20,6 +20,9 @@ public class CoffeeOrderWebController {
   public String coffeeOrderView(@PathVariable("id") String coffeeOrderId, Model model) {
     Long id = Long.valueOf(coffeeOrderId);
     CoffeeOrder coffeeOrder = coffeeOrderRepository.findOne(id);
+    if (coffeeOrder == null) {
+      throw new CoffeeOrderNotFoundHttpException();
+    }
 
     CoffeeOrderResponse response = new CoffeeOrderResponse();
     response.setId(String.valueOf(coffeeOrder.getId()));
