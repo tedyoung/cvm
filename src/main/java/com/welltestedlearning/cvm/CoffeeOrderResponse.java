@@ -6,6 +6,16 @@ public class CoffeeOrderResponse {
   private String poundPrice;
   private String name;
 
+  public static CoffeeOrderResponse convertFrom(CoffeeOrder coffeeOrder) {
+    CoffeeOrderResponse response = new CoffeeOrderResponse();
+
+    response.setId(String.valueOf(coffeeOrder.getId()));
+    response.setPrice(String.valueOf(coffeeOrder.price()));
+    response.setName(coffeeOrder.name());
+
+    return response;
+  }
+
   public String getPoundPrice() {
     return poundPrice;
   }

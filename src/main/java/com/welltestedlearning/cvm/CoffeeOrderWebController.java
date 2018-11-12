@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Controller
 public class CoffeeOrderWebController {
 
@@ -28,13 +31,11 @@ public class CoffeeOrderWebController {
       throw new CoffeeOrderNotFoundHttpException();
     }
 
-    CoffeeOrderResponse response = new CoffeeOrderResponse();
-    response.setId(String.valueOf(coffeeOrder.getId()));
+    CoffeeOrderResponse response = CoffeeOrderResponse.convertFrom(coffeeOrder);
+
     int price = coffeeOrder.price();
-    response.setPrice(String.valueOf(price));
     int poundPrice = currencyConversionService.convertToBritishPound(price);
     response.setPoundPrice(String.valueOf(poundPrice));
-    response.setName(coffeeOrder.name());
 
     model.addAttribute("coffeeOrder", response);
     return "coffee-order-view";
@@ -55,4 +56,24 @@ public class CoffeeOrderWebController {
 
     return "redirect:/coffee-order/" + savedOrder.getId();
   }
+
+  @GetMapping("/coffee-orders")
+  public String allOrders(Model model) {
+    List<CoffeeOrder> coffeeOrders = coffeeOrderRepository.findAll();
+
+    List<CoffeeOrderResponse> responses = coffeeOrders.stream()
+                                                      .map(CoffeeOrderResponse::convertFrom)
+                                                      .collect(Collectors.toList());
+
+    //  The above stream + lambda is the same as this loop:
+//    List<CoffeeOrderResponse> responses = new ArrayList<>();
+//    for (CoffeeOrder coffeeOrder : coffeeOrders) {
+//      CoffeeOrderResponse response = CoffeeOrderResponse.convertFrom(coffeeOrder);
+//      responses.add(response);
+//    }
+
+    model.addAttribute("coffeeOrders", responses);
+    return "all-coffee-orders";
+  }
+
 }
