@@ -6,6 +6,8 @@ import java.util.List;
 public class CoffeeOrder {
   private Long id;
 
+  private String name;
+
   private List<CoffeeItem> coffeeItems = new ArrayList<>();
 
   public int price() {
@@ -14,6 +16,14 @@ public class CoffeeOrder {
       price += item.price();
     }
     return price;
+  }
+
+  public String name() {
+    return name;
+  }
+
+  public void changeNameTo(String newName) {
+    name = newName;
   }
 
   public void display() {

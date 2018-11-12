@@ -10,6 +10,7 @@ public class CoffeeOrderApiControllerTest {
     CoffeeOrderRepository coffeeOrderRepository = new FakeCoffeeOrderRepository();
     CoffeeOrder coffeeOrder = new CoffeeOrder();
     coffeeOrder.size(SizeOption.MEDIUM);
+    coffeeOrder.changeNameTo("Ivan");
     coffeeOrder.setId(123L);
     coffeeOrderRepository.save(coffeeOrder);
 
@@ -20,5 +21,7 @@ public class CoffeeOrderApiControllerTest {
     // medium coffee is 150 cents
     assertThat(coffeeOrderResponse.getPrice())
         .isEqualTo("150");
+    assertThat(coffeeOrderResponse.getName())
+        .isEqualTo("Ivan");
   }
 }

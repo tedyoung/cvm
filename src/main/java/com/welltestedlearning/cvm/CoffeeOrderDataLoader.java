@@ -20,11 +20,13 @@ public class CoffeeOrderDataLoader implements ApplicationRunner {
     // create a couple of coffee orders and save them to the repository
     CoffeeOrder coffeeOrder1 = new CoffeeOrder();
     coffeeOrder1.size(SizeOption.MEDIUM);
+    coffeeOrder1.changeNameTo("Megan");
     coffeeOrderRepository.save(coffeeOrder1);
 
     CoffeeOrder coffeeOrder2 = new CoffeeOrder();
     coffeeOrder2.size(SizeOption.LARGE);
     coffeeOrder2.creamer(CreamerOption.MILK);
+    coffeeOrder2.changeNameTo("Bruce");
     coffeeOrderRepository.save(coffeeOrder2);
   }
 }
