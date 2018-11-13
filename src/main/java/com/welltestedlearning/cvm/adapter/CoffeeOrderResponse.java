@@ -1,4 +1,6 @@
-package com.welltestedlearning.cvm;
+package com.welltestedlearning.cvm.adapter;
+
+import com.welltestedlearning.cvm.domain.CoffeeOrder;
 
 public class CoffeeOrderResponse {
   private String id;

@@ -1,5 +1,6 @@
 package com.welltestedlearning.cvm;
 
+import com.welltestedlearning.cvm.domain.CurrencyConversionService;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;

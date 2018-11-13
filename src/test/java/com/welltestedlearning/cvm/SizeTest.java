@@ -1,5 +1,7 @@
 package com.welltestedlearning.cvm;
 
+import com.welltestedlearning.cvm.domain.Size;
+import com.welltestedlearning.cvm.domain.SizeOption;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

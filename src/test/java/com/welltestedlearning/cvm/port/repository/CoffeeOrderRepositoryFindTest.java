@@ -1,5 +1,7 @@
-package com.welltestedlearning.cvm;
+package com.welltestedlearning.cvm.port.repository;
 
+import com.welltestedlearning.cvm.domain.CoffeeOrder;
+import com.welltestedlearning.cvm.domain.CoffeeOrderRepository;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

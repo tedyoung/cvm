@@ -1,4 +1,4 @@
-package com.welltestedlearning.cvm;
+package com.welltestedlearning.cvm.domain;
 
 public abstract class QuantityItem {
   private int quantity;

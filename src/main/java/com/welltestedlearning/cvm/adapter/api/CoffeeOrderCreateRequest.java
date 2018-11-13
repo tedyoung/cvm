@@ -1,6 +1,6 @@
-package com.welltestedlearning.cvm;
+package com.welltestedlearning.cvm.adapter.api;
 
-public class CoffeeOrderForm {
+public class CoffeeOrderCreateRequest {
   private String name;
   private String size;
   private String creamer;

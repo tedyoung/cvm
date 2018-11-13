@@ -1,4 +1,4 @@
-package com.welltestedlearning.cvm;
+package com.welltestedlearning.cvm.domain;
 
 import java.util.HashMap;
 import java.util.Map;

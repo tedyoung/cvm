@@ -1,8 +1,12 @@
-package com.welltestedlearning.cvm;
+package com.welltestedlearning.cvm.adapter.web;
 
-public class CoffeeOrderCreateRequest {
-  private String name;
+import org.hibernate.validator.constraints.NotBlank;
+
+public class CoffeeOrderForm {
+
   private String size;
+  @NotBlank(message = "Name needs to be not blank")
+  private String name;
   private String creamer;
   private String sweetener;
 

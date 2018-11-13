@@ -1,6 +1,12 @@
 package com.welltestedlearning.cvm;
 
+import com.welltestedlearning.cvm.adapter.web.CoffeeOrderForm;
+import com.welltestedlearning.cvm.adapter.web.CoffeeOrderWebController;
+import com.welltestedlearning.cvm.port.repository.FakeCoffeeOrderRepository;
 import org.junit.Test;
+import org.springframework.validation.MapBindingResult;
+
+import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -12,7 +18,9 @@ public class WebControllerTest {
     CoffeeOrderForm form = new CoffeeOrderForm();
     form.setName("Ted");
     form.setSize("LARGE");
-    coffeeOrderWebController.processOrderCoffee(form);
+    form.setCreamer("MILK");
+    form.setSweetener("NONE");
+    coffeeOrderWebController.processOrderCoffee(form, new MapBindingResult(Collections.emptyMap(), "coffeeOrderForm"));
 
     assertThat(coffeeOrderRepository.findAll())
         .hasSize(1);

@@ -1,12 +1,21 @@
-package com.welltestedlearning.cvm;
+package com.welltestedlearning.cvm.adapter.web;
 
+import com.welltestedlearning.cvm.adapter.CoffeeOrderResponse;
+import com.welltestedlearning.cvm.domain.CoffeeOrder;
+import com.welltestedlearning.cvm.domain.CoffeeOrderRepository;
+import com.welltestedlearning.cvm.domain.CreamerOption;
+import com.welltestedlearning.cvm.domain.CurrencyConversionService;
+import com.welltestedlearning.cvm.domain.SizeOption;
+import com.welltestedlearning.cvm.domain.SweetenerOption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,10 +59,22 @@ public class CoffeeOrderWebController {
   }
 
   @PostMapping("/order-coffee")
-  public String processOrderCoffee(CoffeeOrderForm coffeeOrderForm) {
+  public String processOrderCoffee(@Valid CoffeeOrderForm coffeeOrderForm, BindingResult bindingResult) {
+    SizeOption sizeOption = null;
+    try {
+      sizeOption = SizeOption.valueOf(coffeeOrderForm.getSize().toUpperCase());
+    } catch (IllegalArgumentException e) {
+      bindingResult.rejectValue("size", null, "Invalid size option");
+    }
+
+    if (bindingResult.hasErrors()) {
+      return "order-coffee-form";
+    }
+
+
     CoffeeOrder coffeeOrder = new CoffeeOrder();
     coffeeOrder.changeNameTo(coffeeOrderForm.getName());
-    coffeeOrder.size(SizeOption.valueOf(coffeeOrderForm.getSize().toUpperCase()));
+    coffeeOrder.size(sizeOption);
     coffeeOrder.creamer(CreamerOption.valueOf(coffeeOrderForm.getCreamer().toUpperCase()));
     coffeeOrder.sweetener(SweetenerOption.valueOf(coffeeOrderForm.getSweetener().toUpperCase()));
     CoffeeOrder savedOrder = coffeeOrderRepository.save(coffeeOrder);

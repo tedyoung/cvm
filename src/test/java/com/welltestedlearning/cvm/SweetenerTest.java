@@ -1,5 +1,7 @@
 package com.welltestedlearning.cvm;
 
+import com.welltestedlearning.cvm.domain.Sweetener;
+import com.welltestedlearning.cvm.domain.SweetenerOption;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

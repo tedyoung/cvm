@@ -1,4 +1,4 @@
-package com.welltestedlearning.cvm;
+package com.welltestedlearning.cvm.domain;
 
 public interface CoffeeItem {
   int price();

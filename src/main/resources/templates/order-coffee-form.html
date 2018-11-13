@@ -7,8 +7,13 @@
 <body>
 <h1>New Coffee Order:</h1>
 <form th:action="@{/order-coffee}" th:object="${coffeeOrderForm}" method="post">
-  <p>Name: <input type="text" th:field="*{name}"/></p>
+  <p>Name: <input type="text" th:field="*{name}"/>
+    <span th:if="${#fields.hasErrors('name')}"
+          class="warning">
+      Name needs to be between 2 and 31 characters.</span>
+  </p>
   <p>Size: <input type="text" th:field="*{size}"/></p>
+  <span th:if="${#fields.hasErrors('size')}" th:errors="*{size}">size error</span>
   <p>Creamer: <input type="text" th:field="*{creamer}"/></p>
   <p>Sweetener: <input type="text" th:field="*{sweetener}"/></p>
   <p>

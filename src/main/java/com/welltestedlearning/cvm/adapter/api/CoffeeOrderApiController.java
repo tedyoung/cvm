@@ -1,6 +1,13 @@
-package com.welltestedlearning.cvm;
+package com.welltestedlearning.cvm.adapter.api;
 
 
+import com.welltestedlearning.cvm.adapter.CoffeeOrderResponse;
+import com.welltestedlearning.cvm.domain.CoffeeOrder;
+import com.welltestedlearning.cvm.domain.CoffeeOrderRepository;
+import com.welltestedlearning.cvm.domain.CreamerOption;
+import com.welltestedlearning.cvm.domain.CurrencyConversionService;
+import com.welltestedlearning.cvm.domain.SizeOption;
+import com.welltestedlearning.cvm.domain.SweetenerOption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

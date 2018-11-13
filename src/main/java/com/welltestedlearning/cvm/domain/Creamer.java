@@ -1,4 +1,5 @@
-package com.welltestedlearning.cvm;
+package com.welltestedlearning.cvm.domain;
+
 public class Creamer extends QuantityItem implements CoffeeItem {
 
   private CreamerOption creamerOption;

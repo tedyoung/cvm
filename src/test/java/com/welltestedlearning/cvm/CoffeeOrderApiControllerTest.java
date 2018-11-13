@@ -1,5 +1,11 @@
 package com.welltestedlearning.cvm;
 
+import com.welltestedlearning.cvm.adapter.CoffeeOrderResponse;
+import com.welltestedlearning.cvm.adapter.api.CoffeeOrderApiController;
+import com.welltestedlearning.cvm.domain.CoffeeOrder;
+import com.welltestedlearning.cvm.domain.CoffeeOrderRepository;
+import com.welltestedlearning.cvm.domain.SizeOption;
+import com.welltestedlearning.cvm.port.repository.FakeCoffeeOrderRepository;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

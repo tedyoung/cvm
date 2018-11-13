@@ -1,5 +1,8 @@
 package com.welltestedlearning.cvm;
 
+import com.welltestedlearning.cvm.adapter.CoffeeOrderBuilder;
+import com.welltestedlearning.cvm.domain.CoffeeOrder;
+
 import java.util.Scanner;
 
 public class CoffeeVendingMachine {

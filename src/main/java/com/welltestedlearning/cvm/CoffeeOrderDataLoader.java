@@ -1,6 +1,10 @@
 package com.welltestedlearning.cvm;
 
 
+import com.welltestedlearning.cvm.domain.CoffeeOrder;
+import com.welltestedlearning.cvm.domain.CoffeeOrderRepository;
+import com.welltestedlearning.cvm.domain.CreamerOption;
+import com.welltestedlearning.cvm.domain.SizeOption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;

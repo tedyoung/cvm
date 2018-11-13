@@ -1,5 +1,7 @@
-package com.welltestedlearning.cvm;
+package com.welltestedlearning.cvm.port;
 
+import com.welltestedlearning.cvm.domain.CurrencyConversionService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -12,8 +14,8 @@ import java.util.Map;
 @Service
 public class HttpCurrencyConversionService implements CurrencyConversionService {
 
-  private static final String CONVERSION_URL =
-      "http://jitterted-currency-conversion.herokuapp.com/convert?from={from}&to={to}&amount={amount}";
+  @Value("${currencyconversion.uri}")
+  private String CONVERSION_URL;
 
   private final RestTemplate restTemplate = new RestTemplate();
 

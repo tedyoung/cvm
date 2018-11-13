@@ -1,5 +1,7 @@
 package com.welltestedlearning.cvm;
 
+import com.welltestedlearning.cvm.domain.Creamer;
+import com.welltestedlearning.cvm.domain.CreamerOption;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

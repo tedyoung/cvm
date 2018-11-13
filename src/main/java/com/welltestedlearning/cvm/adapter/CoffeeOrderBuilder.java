@@ -1,4 +1,9 @@
-package com.welltestedlearning.cvm;
+package com.welltestedlearning.cvm.adapter;
+
+import com.welltestedlearning.cvm.domain.CoffeeOrder;
+import com.welltestedlearning.cvm.domain.CreamerOption;
+import com.welltestedlearning.cvm.domain.SizeOption;
+import com.welltestedlearning.cvm.domain.SweetenerOption;
 
 public class CoffeeOrderBuilder {
   private String size;
