@@ -1,11 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>New Coffee Order</title>
+</head>
 <body>
 <h1>New Coffee Order:</h1>
-<form action="/order-coffee" method="post">
-  <p>Name: <input type="text" name="name"/></p>
-  <p>Size: <input type="text" name="size" value="SMALL"/></p>
+<form th:action="@{/order-coffee}" th:object="${coffeeOrderForm}" method="post">
+  <p>Name: <input type="text" th:field="*{name}"/></p>
+  <p>Size: <input type="text" th:field="*{size}"/></p>
+  <p>Creamer: <input type="text" th:field="*{creamer}"/></p>
+  <p>Sweetener: <input type="text" th:field="*{sweetener}"/></p>
   <p>
     <input type="submit" value="Order Coffee"/>
-    <input type="reset" value="Clear"/>
   </p>
 </form>
 </body>

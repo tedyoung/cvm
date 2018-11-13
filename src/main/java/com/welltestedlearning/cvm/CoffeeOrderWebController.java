@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -42,16 +41,21 @@ public class CoffeeOrderWebController {
   }
 
   @GetMapping("/order-coffee")
-  public String orderCoffeeForm() {
+  public String orderCoffeeForm(Model model) {
+    CoffeeOrderForm coffeeOrderForm = new CoffeeOrderForm();
+    coffeeOrderForm.setSize("LARGE");
+    coffeeOrderForm.setCreamer("NONE");
+    model.addAttribute("coffeeOrderForm", coffeeOrderForm);
     return "order-coffee-form";
   }
 
   @PostMapping("/order-coffee")
-  public String processOrderCoffee(@ModelAttribute("name") String name,
-      @ModelAttribute("size") String size) {
+  public String processOrderCoffee(CoffeeOrderForm coffeeOrderForm) {
     CoffeeOrder coffeeOrder = new CoffeeOrder();
-    coffeeOrder.changeNameTo(name);
-    coffeeOrder.size(SizeOption.valueOf(size.toUpperCase()));
+    coffeeOrder.changeNameTo(coffeeOrderForm.getName());
+    coffeeOrder.size(SizeOption.valueOf(coffeeOrderForm.getSize().toUpperCase()));
+    coffeeOrder.creamer(CreamerOption.valueOf(coffeeOrderForm.getCreamer().toUpperCase()));
+    coffeeOrder.sweetener(SweetenerOption.valueOf(coffeeOrderForm.getSweetener().toUpperCase()));
     CoffeeOrder savedOrder = coffeeOrderRepository.save(coffeeOrder);
 
     return "redirect:/coffee-order/" + savedOrder.getId();
@@ -64,13 +68,6 @@ public class CoffeeOrderWebController {
     List<CoffeeOrderResponse> responses = coffeeOrders.stream()
                                                       .map(CoffeeOrderResponse::convertFrom)
                                                       .collect(Collectors.toList());
-
-    //  The above stream + lambda is the same as this loop:
-//    List<CoffeeOrderResponse> responses = new ArrayList<>();
-//    for (CoffeeOrder coffeeOrder : coffeeOrders) {
-//      CoffeeOrderResponse response = CoffeeOrderResponse.convertFrom(coffeeOrder);
-//      responses.add(response);
-//    }
 
     model.addAttribute("coffeeOrders", responses);
     return "all-coffee-orders";
