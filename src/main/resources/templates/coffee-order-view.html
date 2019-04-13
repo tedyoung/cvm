@@ -6,7 +6,20 @@
 </head>
 <body>
 <h1>Coffee For: <span th:text="${coffeeOrder.name}">Joe</span></h1>
+
+<h2>Order:</h2>
+<ul>
+  <li th:each="item : ${coffeeItems}" th:text="${item}">Size: LARGE</li>
+</ul>
+
 <p>USD Price: <span th:text="${coffeeOrder.price}">150</span></p>
 <p>GBP Price: <span th:text="${coffeeOrder.poundPrice}">15</span></p>
+
+<h2>Status: <span th:text="${coffeeOrder.status}"></span></h2>
+
+<form th:action="@{/send-order}" method="post">
+  <input type="hidden" name="id" th:value="${id}">
+  <input type="submit" value="Send Order"/>
+</form>
 </body>
 </html>

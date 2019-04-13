@@ -1,12 +1,22 @@
 package com.welltestedlearning.cvm.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "COFFEE_ORDERS")
 public class CoffeeOrder {
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
   private String name;
+  private Long orderNumber;
 
   private List<CoffeeItem> coffeeItems = new ArrayList<>();
 
@@ -51,5 +61,17 @@ public class CoffeeOrder {
 
   public void setId(Long id) {
     this.id = id;
+  }
+
+  public List<CoffeeItem> items() {
+    return coffeeItems;
+  }
+
+  public void updateOrderNumberTo(long orderNumber) {
+    this.orderNumber = orderNumber;
+  }
+
+  public Long orderNumber() {
+    return orderNumber;
   }
 }

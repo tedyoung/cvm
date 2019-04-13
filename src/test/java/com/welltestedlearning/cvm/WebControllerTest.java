@@ -2,6 +2,7 @@ package com.welltestedlearning.cvm;
 
 import com.welltestedlearning.cvm.adapter.web.CoffeeOrderForm;
 import com.welltestedlearning.cvm.adapter.web.CoffeeOrderWebController;
+import com.welltestedlearning.cvm.domain.StubSendCoffeeOrderService;
 import com.welltestedlearning.cvm.port.repository.FakeCoffeeOrderRepository;
 import org.junit.Test;
 import org.springframework.validation.MapBindingResult;
@@ -14,7 +15,10 @@ public class WebControllerTest {
   @Test
   public void postWorks() throws Exception {
     FakeCoffeeOrderRepository coffeeOrderRepository = new FakeCoffeeOrderRepository();
-    CoffeeOrderWebController coffeeOrderWebController = new CoffeeOrderWebController(coffeeOrderRepository, new StubCurrencyConversionService());
+    CoffeeOrderWebController coffeeOrderWebController = new CoffeeOrderWebController(
+        coffeeOrderRepository,
+        new StubCurrencyConversionService(),
+        new StubSendCoffeeOrderService());
     CoffeeOrderForm form = new CoffeeOrderForm();
     form.setName("Ted");
     form.setSize("LARGE");

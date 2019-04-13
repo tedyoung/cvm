@@ -7,6 +7,7 @@ public class CoffeeOrderResponse {
   private String price;
   private String poundPrice;
   private String name;
+  private String status;
 
   public static CoffeeOrderResponse convertFrom(CoffeeOrder coffeeOrder) {
     CoffeeOrderResponse response = new CoffeeOrderResponse();
@@ -16,6 +17,14 @@ public class CoffeeOrderResponse {
     response.setName(coffeeOrder.name());
 
     return response;
+  }
+
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
   }
 
   public String getPoundPrice() {
